@@ -7,7 +7,7 @@ using System.Text;
 
 namespace GiatDo.Data
 {
-    public class GiatDoDbContext : DbContext
+    public class GiatDoDbContext : IdentityDbContext<MyUser>
     {
         public GiatDoDbContext() : base((new DbContextOptionsBuilder())
         .UseLazyLoadingProxies()

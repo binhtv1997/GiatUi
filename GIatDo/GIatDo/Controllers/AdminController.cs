@@ -55,7 +55,8 @@ namespace GIatDo.Controllers
         public ActionResult GetAllAdmin()
         {
             var AdminList = _adminService.GetAdmins();
-            return Ok(AdminList.Adapt<AdminVM>());
+            var a = AdminList.Adapt<List<AdminVM>>();
+            return Ok(a);
         }
 
         [HttpPut]

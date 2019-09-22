@@ -41,15 +41,13 @@ namespace GIatDo
             //add for data
             services.AddScoped<IDbFactory, DbFactory>();
             services.AddTransient<IUnitOfWork, UnitOfWork>();
-            //EventLog
-            //services.AddTransient<IDataViewsRepository, DataViewsRepository>();
-            //services.AddTransient<IDataViewsService, DataViewsService>();
 
             services.AddTransient<IAdminRepository, AdminRepository>();
             services.AddTransient<IAdminService, AdminService>();
 
-            //services.AddTransient<ICustomerRepository, CustomerRepository>();
-            //services.AddTransient<ICustomerService, CustomerService>();
+
+            services.AddTransient<IServiceTypeRepository, ServiceTypeRepository>();
+            services.AddTransient<IServiceTypeService, ServiceTypeService>();
             #endregion
 
             #region Setup1
