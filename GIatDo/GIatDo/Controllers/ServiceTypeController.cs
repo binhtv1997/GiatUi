@@ -28,12 +28,37 @@ namespace GIatDo.Controllers
             return Ok(_serviceTypeService.GetAll().Adapt<List<ServiceTypeVM>>());
         }
 
-        [HttpPost]
-        public ActionResult CreateAdmin([FromBody] ServiceTypeVM admin) 
+        [HttpPost("Create")]
+        public ActionResult CreateAdmin([FromBody] CreateServiceTypeVM ServiceType)
         {
-            ServiceType Service = admin.Adapt<ServiceType>();
+            ServiceType Service = ServiceType.Adapt<ServiceType>();
             _serviceTypeService.CreateServiceType(Service);
-            return BadRequest();
+            return Ok(200);
+        }
+        [HttpPut("Update")]
+        public ActionResult UpdateService([FromBody] UpdateServiceTypeVM ServiceType)
+        {
+            var result = _serviceTypeService.GetServiceType(ServiceType.Id);
+            if (result == null)
+            {
+                return NotFound();
+            }
+            ServiceType newService = ServiceType.Adapt(result);
+            _serviceTypeService.UpdateServiceType(newService);
+            _serviceTypeService.Save();
+            return Ok(200);
+        }
+        [HttpDelete("Delete")]
+        public ActionResult DeleteService(Guid Id)
+        {
+            var result = _serviceTypeService.GetServiceType(Id);
+            if (result == null)
+            {
+                return NotFound();
+            }
+            _serviceTypeService.DeleteServiceType(result);
+            _serviceTypeService.Save();
+            return Ok(200);
         }
     }
 }

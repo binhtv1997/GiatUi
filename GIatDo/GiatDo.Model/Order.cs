@@ -11,8 +11,8 @@ namespace GiatDo.Model
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public Guid Id { get; set; }
-        public DateTime CreateTime { get; set; }
-        public DateTime TakeTime { get; set; }
+        public DateTime? CreateTime { get; set; }
+        public DateTime? TakeTime { get; set; }
         public float TotalPrice { get; set; }
         public bool Status { get; set; }
         public virtual Customer Customer { get; set; }
@@ -27,6 +27,5 @@ namespace GiatDo.Model
         public Guid? SlotDeliveryId { get; set; }
         public virtual ICollection<OrderService> OrderServices { get; set; }
         public DateTime DateCreate { get; set; }
-
     }
 }

@@ -40,7 +40,7 @@ namespace GIatDo.Controllers
             return BadRequest();
         }
 
-        [HttpGet]
+        [HttpGet("GetById")]
         public ActionResult GetAdmin(Guid Id)
         {
             var result = _adminService.GetAdmin(Id);
@@ -59,7 +59,7 @@ namespace GIatDo.Controllers
             return Ok(a);
         }
 
-        [HttpPut]
+        [HttpPut("UpdateAdmin")]
         public ActionResult UpdateAdmin([FromBody] UpdateAdminVM admin)
         {
             var result = _adminService.GetAdmin(admin.Id);
@@ -78,7 +78,7 @@ namespace GIatDo.Controllers
             return BadRequest();
         }
 
-        [HttpDelete]
+        [HttpDelete("DeleteAdmin")]
         public ActionResult DeleteAdmin(Guid Id)
         {
             var result = _adminService.GetAdmin(Id);
@@ -90,5 +90,6 @@ namespace GIatDo.Controllers
             _adminService.Save();
             return Ok(200);
         }
+
     }
 }
