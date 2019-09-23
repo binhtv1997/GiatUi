@@ -48,6 +48,9 @@ namespace GIatDo
 
             services.AddTransient<IServiceTypeRepository, ServiceTypeRepository>();
             services.AddTransient<IServiceTypeService, ServiceTypeService>();
+
+            services.AddTransient<ISlotService, SlotService>();
+            services.AddTransient<ISlotRepository, SlotRepository>();
             #endregion
 
             #region Setup1
