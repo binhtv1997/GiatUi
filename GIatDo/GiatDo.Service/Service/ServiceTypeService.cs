@@ -18,7 +18,7 @@ namespace GiatDo.Service.Service
         void CreateServiceType(ServiceType ServiceType);
         void UpdateServiceType(ServiceType ServiceType);
         void DeleteServiceType(ServiceType ServiceType);
-        void DeleteServiceType(Expression<Func<ServiceType, bool>> where, string username);
+        void DeleteServiceType(Expression<Func<ServiceType, bool>> where);
         void Save();
     }
     public class ServiceTypeService : IServiceTypeService
@@ -42,7 +42,7 @@ namespace GiatDo.Service.Service
             _repository.Delete(ServiceType);
         }
 
-        public void DeleteServiceType(Expression<Func<ServiceType, bool>> where, string username)
+        public void DeleteServiceType(Expression<Func<ServiceType, bool>> where)
         {
             var ListServiceType = _repository.GetMany(where);
             foreach (var i in ListServiceType)

@@ -17,7 +17,7 @@ namespace GiatDo.Service.Service
         void CreateAdmin(Admin Admin);
         void UpdateAdmin(Admin Admin);
         void DeleteAdmin(Admin Admin);
-        void DeleteAdmin(Expression<Func<Admin, bool>> where, string username);
+        void DeleteAdmin(Expression<Func<Admin, bool>> where);
         void Save();
     }
     public class AdminService : IAdminService
@@ -42,7 +42,7 @@ namespace GiatDo.Service.Service
             _repository.Delete(Admin);
         }
 
-        public void DeleteAdmin(Expression<Func<Admin, bool>> where, string username)
+        public void DeleteAdmin(Expression<Func<Admin, bool>> where)
         {
             var ListAdmin = _repository.GetMany(where);
 
