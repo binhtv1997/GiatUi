@@ -26,5 +26,7 @@ namespace GiatDo.Model
         public virtual Slot SlotDelivery { get; set; }
         public Guid? SlotDeliveryId { get; set; }
         public virtual ICollection<OrderService> OrderServices { get; set; }
+        public DateTime DateCreate { get; set; }
+
     }
 }

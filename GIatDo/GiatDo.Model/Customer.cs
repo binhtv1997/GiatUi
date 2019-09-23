@@ -18,5 +18,7 @@ namespace GiatDo.Model
         public virtual Account Account { get; set; }
         public Guid? AccountId { get; set; }
         public virtual ICollection<Order> Orders { get; set; }
+        public DateTime DateCreate { get; set; }
+
     }
 }

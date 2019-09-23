@@ -18,5 +18,6 @@ namespace GiatDo.Model
         public string Phone { get; set; }
         public virtual Account Account { get; set; }
         public Guid? AccountId { get; set; }
+        public DateTime DateCreate { get; set; }
     }
 }
