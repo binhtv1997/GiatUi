@@ -54,6 +54,24 @@ namespace GIatDo
 
             services.AddTransient<IShipperService, ShipperService>();
             services.AddTransient<IShipperRepository, ShipperRepository>();
+
+            services.AddTransient<ICustomerService, CustomerService>();
+            services.AddTransient<ICustomerRepository, CustomerRepository>();
+
+            services.AddTransient<ISlotService, SlotService>();
+            services.AddTransient<ISlotRepository, SlotRepository>();
+
+            services.AddTransient<IServiceService, ServiceService>();
+            services.AddTransient<IServiceRepository, ServiceRepository>();
+
+            services.AddTransient<IOrderService, OrderServices>();
+            services.AddTransient<IOrderRepository, OrderRepository>();
+
+            services.AddTransient<IOrderSService, OrderSService>();
+            services.AddTransient<IOrderServiceRepository, OrderServiceRepository>();
+
+            services.AddTransient<IStoreService, StoreService>();
+            services.AddTransient<IStoreRepository, StoreRepository>();
             #endregion
 
             #region Setup1
