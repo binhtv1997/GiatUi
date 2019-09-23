@@ -25,6 +25,12 @@ namespace GiatDo.Service.Service
         private readonly IOrderServiceRepository _repository;
         private readonly IUnitOfWork _unitOfWork;
 
+        public OrderSService(IOrderServiceRepository repository, IUnitOfWork unitOfWork)
+        {
+            _repository = repository;
+            _unitOfWork = unitOfWork;
+        }
+
         public void CreateOrderService(OrderService OrderService)
         {
             _repository.Add(OrderService);
