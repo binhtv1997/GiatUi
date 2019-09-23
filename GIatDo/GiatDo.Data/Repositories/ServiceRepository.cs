@@ -6,11 +6,11 @@ using System.Text;
 
 namespace GiatDo.Data.Repositories
 {
-    public interface IServiceRepository : IRepository<Service>
+    public interface IServiceRepository : IRepository<Services>
     {
 
     }
-    public class ServiceRepository : RepositoryBase<Service>, IServiceRepository
+    public class ServiceRepository : RepositoryBase<Services>, IServiceRepository
     {
         public ServiceRepository(IDbFactory dbFactory) : base(dbFactory)
         {

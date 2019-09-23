@@ -33,6 +33,7 @@ namespace GiatDo.Service.Service
 
         public void CreateAdmin(Admin Admin)
         {
+            Admin.DateCreate = DateTime.Now;
             _repository.Add(Admin);
         }
 

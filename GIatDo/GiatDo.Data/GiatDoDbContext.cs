@@ -21,7 +21,7 @@ namespace GiatDo.Data
         public DbSet<Order> Order { get; set; }
         public DbSet<OrderService> OrderService { get; set; }
         public DbSet<Shipper> Shipper { get; set; }
-        public DbSet<Service> Service { get; set; }
+        public DbSet<Services> Service { get; set; }
         public DbSet<ServiceType> ServiceType { get; set; }
         public DbSet<Slot> Slot { get; set; }
         public DbSet<Store> Store { get; set; }

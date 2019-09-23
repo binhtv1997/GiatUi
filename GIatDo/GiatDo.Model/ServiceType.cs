@@ -12,6 +12,6 @@ namespace GiatDo.Model
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public Guid Id { get; set; }
         public string Name { get; set; }
-        public virtual ICollection<Service> Services { get; set; }
+        public virtual ICollection<Services> Services { get; set; }
     }
 }

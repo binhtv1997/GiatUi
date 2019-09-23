@@ -6,7 +6,7 @@ using System.Text;
 
 namespace GiatDo.Model
 {
-    public class Service
+    public class Services
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]

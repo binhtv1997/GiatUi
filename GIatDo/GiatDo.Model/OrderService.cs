@@ -15,7 +15,7 @@ namespace GiatDo.Model
         public string Price { get; set; }
         public virtual Order Order { get; set; }
         public Guid? OrderId { get; set; }
-        public virtual Service Service { get; set; }
+        public virtual Services Service { get; set; }
         public Guid? ServiceId { get; set; }
     }
 }
