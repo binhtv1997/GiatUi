@@ -20,12 +20,12 @@ namespace GiatDo.Service.Service
         void DeleteOrder(Expression<Func<Order, bool>> where);
         void Save();
     }
-    public class OrderService : IOrderService
+    public class OrderServices : IOrderService
     {
         private readonly IOrderRepository _repository;
         private readonly IUnitOfWork _unitOfWork;
 
-        public OrderService(IOrderRepository repository, IUnitOfWork unitOfWork)
+        public OrderServices(IOrderRepository repository, IUnitOfWork unitOfWork)
         {
             _repository = repository;
             _unitOfWork = unitOfWork;
