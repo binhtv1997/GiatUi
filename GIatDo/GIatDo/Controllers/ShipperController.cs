@@ -59,7 +59,28 @@ namespace GIatDo.Controllers
             return Ok(200);
 
         }
-        //[HttpGet("GetOrderTake")]
-        //public ActionResult GetOrderTake(Guid Id) { }
+        [HttpGet("GetOrderTake")]
+        public ActionResult GetOrderTake(Guid Id)
+        {
+            var listOrder = _orderService.GetOrders(s => s.ShipperTakeId == Id);
+            foreach (var i in listOrder)
+            {
+
+            }
+            return Ok(listOrder.Adapt<List<OrderTakeVM>>());
+        }
+        [HttpGet("GetOrderDelivery")]
+        public ActionResult GetOrderDelevery(Guid Id)
+        {
+            var listOrder = _orderService.GetOrders(s => s.ShipperDeliverId == Id);
+            return Ok(listOrder.Adapt<List<OrderTakeVM>>());
+        }
+
+        [HttpPut("Update")]
+        public ActionResult UpdateShipper()
+        {
+
+        }
+
     }
 }
