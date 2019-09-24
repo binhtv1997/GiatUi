@@ -29,7 +29,7 @@ namespace GIatDo.Controllers
             var result = _shipperService.GetShippers(s => s.Phone == shipper.Phone);
             if (result.Count() > 0)
             {
-                return BadRequest();
+                return BadRequest("Phone Number Has Been Exist");
             }
             Shipper newShipper = shipper.Adapt<Shipper>();
             _shipperService.CreateShipper(newShipper);
@@ -77,9 +77,21 @@ namespace GIatDo.Controllers
         }
 
         [HttpPut("Update")]
-        public ActionResult UpdateShipper()
+        public ActionResult UpdateShipper(ShipperVM model)
         {
-
+            var _shipper = _shipperService.GetShipper(model.Id);
+            if (_shipper == null)
+            {
+                return NotFound();
+            }
+            if (_shipperService.GetShippers(s => s.Phone == model.Phone).Count() > 0)
+            {
+                return BadRequest("Phone Number Has Been Exist");
+            }
+            Shipper newShipper = model.Adapt(_shipper);
+            _shipperService.UpdateShipper(newShipper);
+            _shipperService.Save();
+            return Ok(200);
         }
 
     }
