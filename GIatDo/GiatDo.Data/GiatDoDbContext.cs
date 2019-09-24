@@ -11,7 +11,10 @@ namespace GiatDo.Data
     {
         public GiatDoDbContext() : base((new DbContextOptionsBuilder())
         .UseLazyLoadingProxies()
-       .UseSqlServer(@"Server=.;Database=GiatDo;user id=sa;password=1;Trusted_Connection=True;Integrated Security=false;")
+       .UseSqlServer(@"Server=g1-laundry.database.windows.net
+;Database=GiatDo;user id=laundry-admin
+;password=thuy@fpt1998
+;Trusted_Connection=True;Integrated Security=false;")
            .Options)
         {
         }

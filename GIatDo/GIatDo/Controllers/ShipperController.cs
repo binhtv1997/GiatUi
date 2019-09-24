@@ -59,7 +59,7 @@ namespace GIatDo.Controllers
             return Ok(200);
 
         }
-        [HttpGet("GetOrderTake")]
-        public ActionResult GetOrderTake(Guid Id) { }
+        //[HttpGet("GetOrderTake")]
+        //public ActionResult GetOrderTake(Guid Id) { }
     }
 }

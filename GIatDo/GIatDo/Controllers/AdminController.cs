@@ -23,7 +23,7 @@ namespace GIatDo.Controllers
         }
 
         [HttpPost]
-        public ActionResult CreateAdmin([FromBody] AdminVM admin)
+        public ActionResult CreateAdmin([FromBody] CreateVM admin)
         {
             var result = _adminService.GetAdmins().Where(a => a.Phone == admin.Phone);
             if (result.Count() > 0)
