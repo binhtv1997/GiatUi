@@ -13,16 +13,20 @@ namespace GIatDo.ViewModel
         public string Email { get; set; }
         public string Address { get; set; }
         public string Phone { get; set; }
+        public Guid AccountId { get; set; }
+
     }
 
-    public class CreateVM
+    public class AdminCM
     {
         public string Password { get; set; }
         public string Name { get; set; }
         public string Email { get; set; }
         public string Address { get; set; }
         public string Phone { get; set; }
+        public Guid AccountId { get; set; }
     }
+
 
     public class UpdateAdminVM
     {
@@ -32,5 +36,6 @@ namespace GIatDo.ViewModel
         public string Email { get; set; }
         public string Address { get; set; }
         public string Phone { get; set; }
+        public Guid AccountId { get; set; }
     }
 }

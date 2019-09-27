@@ -12,6 +12,7 @@ namespace GIatDo.ViewModel
         public float TotalPrice { get; set; }
         public bool Status { get; set; }
         public string CustomerName { get; set; }
+        public Guid CustomerId { get; set; }
         public Guid? ShipperTakeId { get; set; }
         public Guid? SlotTakeId { get; set; }
     }
@@ -22,6 +23,7 @@ namespace GIatDo.ViewModel
         public float TotalPrice { get; set; }
         public bool Status { get; set; }
         public Guid? ShipperDeliverId { get; set; }
+        public Guid CustomerId { get; set; }
         public string CustomerName { get; set; }
         public Guid? SlotDeliveryId { get; set; }
     }

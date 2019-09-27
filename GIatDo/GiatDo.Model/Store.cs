@@ -15,9 +15,9 @@ namespace GiatDo.Model
         public string Email { get; set; }
         public float Rate { get; set; }
         public virtual Account Account { get; set; }
-        public Guid AccountId { get; set; }
+        public Guid? AccountId { get; set; }
+        public string Phone { get; set; }
         public virtual ICollection<Services> Services { get; set; }
         public DateTime DateCreate { get; set; }
-
     }
 }

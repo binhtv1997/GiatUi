@@ -17,12 +17,15 @@ namespace GIatDo.Controllers
     {
         private readonly IShipperService _shipperService;
         private readonly IOrderService _orderService;
+        private readonly ICustomerService _customerService;
 
-        public ShipperController(IShipperService shipperService, IOrderService orderService)
+        public ShipperController(IShipperService shipperService, IOrderService orderService, ICustomerService customerService)
         {
             _shipperService = shipperService;
             _orderService = orderService;
+            _customerService = customerService;
         }
+
         [HttpPost("CreateShipper")]
         public ActionResult CreateShipper([FromBody] CreateShipperVM shipper)
         {
@@ -62,20 +65,23 @@ namespace GIatDo.Controllers
         [HttpGet("GetOrderTake")]
         public ActionResult GetOrderTake(Guid Id)
         {
-            var listOrder = _orderService.GetOrders(s => s.ShipperTakeId == Id);
+            var listOrder = _orderService.GetOrders(s => s.ShipperTakeId == Id).Adapt<List<OrderTakeVM>>();
             foreach (var i in listOrder)
             {
-
+                i.CustomerName = _customerService.GetCustomer(i.CustomerId).Name;
             }
-            return Ok(listOrder.Adapt<List<OrderTakeVM>>());
+            return Ok(listOrder);
         }
         [HttpGet("GetOrderDelivery")]
         public ActionResult GetOrderDelevery(Guid Id)
         {
-            var listOrder = _orderService.GetOrders(s => s.ShipperDeliverId == Id);
-            return Ok(listOrder.Adapt<List<OrderTakeVM>>());
+            var listOrder = _orderService.GetOrders(s => s.ShipperDeliverId == Id).Adapt<List<OrderDeleveryVM>>();
+            foreach (var i in listOrder)
+            {
+                i.CustomerName = _customerService.GetCustomer(i.CustomerId).Name;
+            }
+            return Ok(listOrder);
         }
-
         [HttpPut("Update")]
         public ActionResult UpdateShipper(ShipperVM model)
         {

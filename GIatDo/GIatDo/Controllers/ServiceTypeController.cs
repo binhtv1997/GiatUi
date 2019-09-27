@@ -33,6 +33,7 @@ namespace GIatDo.Controllers
         {
             ServiceType Service = ServiceType.Adapt<ServiceType>();
             _serviceTypeService.CreateServiceType(Service);
+            _serviceTypeService.Save();
             return Ok(200);
         }
         [HttpPut("Update")]

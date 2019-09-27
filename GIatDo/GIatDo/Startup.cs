@@ -72,6 +72,9 @@ namespace GIatDo
 
             services.AddTransient<IStoreService, StoreService>();
             services.AddTransient<IStoreRepository, StoreRepository>();
+
+            services.AddTransient<IAccountService, AccountService>();
+            services.AddTransient<IAccountRepository, AccountRepository>();
             #endregion
 
             #region Setup1

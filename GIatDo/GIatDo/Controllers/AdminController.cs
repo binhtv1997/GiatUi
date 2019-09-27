@@ -16,20 +16,28 @@ namespace GIatDo.Controllers
     public class AdminController : ControllerBase
     {
         private readonly IAdminService _adminService;
+        private readonly IAccountService _accountService;
 
-        public AdminController(IAdminService adminService)
+        public AdminController(IAdminService adminService, IAccountService accountService)
         {
-            this._adminService = adminService;
+            _adminService = adminService;
+            _accountService = accountService;
         }
 
         [HttpPost]
-        public ActionResult CreateAdmin([FromBody] CreateVM admin)
+        public ActionResult CreateAdmin([FromBody] AdminCM admin)
         {
+            var checkAccount = _accountService.GetAccount(admin.AccountId);
+            if(checkAccount== null)
+            {
+                return BadRequest("Account Dont Exist");
+            }
             var result = _adminService.GetAdmins().Where(a => a.Phone == admin.Phone);
             if (result.Count() > 0)
             {
-                return BadRequest();
+                return BadRequest("Phone Number Has Been Exsit");
             }
+
             Admin newAdmin = admin.Adapt<Admin>();
             if (admin.Password.Length > 6)
             {
@@ -37,7 +45,7 @@ namespace GIatDo.Controllers
                 _adminService.Save();
                 return Ok(200);
             }
-            return BadRequest();
+            return BadRequest("Password has more 6 charater");
         }
 
         [HttpGet("GetById")]
@@ -62,6 +70,11 @@ namespace GIatDo.Controllers
         [HttpPut("UpdateAdmin")]
         public ActionResult UpdateAdmin([FromBody] UpdateAdminVM admin)
         {
+            var checkAccount = _accountService.GetAccount(admin.AccountId);
+            if (checkAccount == null)
+            {
+                return BadRequest("Account Dont Exist");
+            }
             var result = _adminService.GetAdmin(admin.Id);
             if (result == null)
             {
@@ -74,8 +87,7 @@ namespace GIatDo.Controllers
                 _adminService.Save();
                 return Ok(200);
             }
-
-            return BadRequest();
+            return BadRequest("Password has more 6 charater");
         }
 
         [HttpDelete("DeleteAdmin")]

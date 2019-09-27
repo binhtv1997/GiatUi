@@ -26,7 +26,7 @@ namespace GiatDo.Data.Migrations
 
                     b.Property<DateTime>("DateCreate");
 
-                    b.Property<Guid>("User_Id");
+                    b.Property<string>("User_Id");
 
                     b.HasKey("Id");
 
@@ -226,7 +226,7 @@ namespace GiatDo.Data.Migrations
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<Guid>("AccountId");
+                    b.Property<Guid?>("AccountId");
 
                     b.Property<DateTime>("DateCreate");
 
@@ -234,12 +234,15 @@ namespace GiatDo.Data.Migrations
 
                     b.Property<string>("Name");
 
+                    b.Property<string>("Phone");
+
                     b.Property<float>("Rate");
 
                     b.HasKey("Id");
 
                     b.HasIndex("AccountId")
-                        .IsUnique();
+                        .IsUnique()
+                        .HasFilter("[AccountId] IS NOT NULL");
 
                     b.ToTable("Store");
                 });
@@ -317,8 +320,7 @@ namespace GiatDo.Data.Migrations
                 {
                     b.HasOne("GiatDo.Model.Account", "Account")
                         .WithOne("Store")
-                        .HasForeignKey("GiatDo.Model.Store", "AccountId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .HasForeignKey("GiatDo.Model.Store", "AccountId");
                 });
 #pragma warning restore 612, 618
         }

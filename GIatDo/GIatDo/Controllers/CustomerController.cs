@@ -15,24 +15,37 @@ namespace GIatDo.ViewModel
     public class CustomerController : ControllerBase
     {
         private readonly ICustomerService _customerService;
+        private readonly IAccountService _accountService;
 
-        public CustomerController(ICustomerService customerService)
+        public CustomerController(ICustomerService customerService, IAccountService accountService)
         {
             _customerService = customerService;
+            _accountService = accountService;
         }
 
         [HttpPost]
-        public ActionResult CreateCustomer([FromBody] CustomerCM Model)
+        public ActionResult CreateCustomer([FromBody] CustomerCM model)
         {
-            var result = _customerService.GetCustomers().Where(a => a.Phone == Model.Phone);
-            if (result.Count() > 0)
+
+            try
             {
-                return BadRequest();
+                var checkAccount = _accountService.GetAccount(model.AccountId);
+
+                var result = _customerService.GetCustomers().Where(a => a.Phone == model.Phone);
+                if (result.Count() > 0)
+                {
+                    return BadRequest("Phone Number Has Been Exsit");
+                }
+                Customer newCustomer = model.Adapt<Customer>();
+                _customerService.CreateCustomer(newCustomer);
+                _customerService.Save();
+                return Ok(200);
             }
-            Customer newCustomer = Model.Adapt<Customer>();
-            _customerService.CreateCustomer(newCustomer);
-            _customerService.Save();
-            return Ok(200);
+            catch (Exception e)
+            {
+                return BadRequest("Account Dont Exist");
+            }
+
         }
 
         [HttpGet("GetById")]
