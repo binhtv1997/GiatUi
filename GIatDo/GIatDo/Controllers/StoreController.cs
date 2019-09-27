@@ -87,6 +87,10 @@ namespace GIatDo.Controllers
                 return BadRequest(e.Message);
             }
         }
-
+        [HttpGet("GetUserId")]
+        public ActionResult GetStoreByUserId(Guid Id)
+        {
+            return Ok(_storeService.GetStores().Where(s => s.AccountId == Id).Adapt<List<StoreVM>>());
+        }
     }
 }
