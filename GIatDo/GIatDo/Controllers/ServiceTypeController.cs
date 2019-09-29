@@ -27,6 +27,11 @@ namespace GIatDo.Controllers
         {
             return Ok(_serviceTypeService.GetAll().Adapt<List<ServiceTypeVM>>());
         }
+        [HttpGet("GetById")]
+        public ActionResult GetById(Guid Id)
+        {
+            return Ok(_serviceTypeService.GetServiceType(Id).Adapt<ServiceTypeVM>());
+        }
 
         [HttpPost("Create")]
         public ActionResult CreateAdmin([FromBody] CreateServiceTypeVM ServiceType)

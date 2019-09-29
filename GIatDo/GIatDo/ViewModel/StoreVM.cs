@@ -20,7 +20,7 @@ namespace GIatDo.ViewModel
         public string Name { get; set; }
         public string Email { get; set; }
         public float Rate { get; set; }
-        //public Guid? AccountId { get; set; }
+        public Guid? AccountId { get; set; }
         public string Phone { get; set; }
     }
     public class StoreCM

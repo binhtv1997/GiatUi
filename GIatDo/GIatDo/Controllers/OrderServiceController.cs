@@ -11,6 +11,5 @@ namespace GIatDo.Controllers
     [ApiController]
     public class OrderServiceController : ControllerBase
     {
-
     }
 }
