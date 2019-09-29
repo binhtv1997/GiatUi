@@ -11,5 +11,6 @@ namespace GIatDo.Controllers
     [ApiController]
     public class SlotController : ControllerBase
     {
+
     }
 }

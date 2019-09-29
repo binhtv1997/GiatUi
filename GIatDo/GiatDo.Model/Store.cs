@@ -19,5 +19,7 @@ namespace GiatDo.Model
         public string Phone { get; set; }
         public virtual ICollection<Services> Services { get; set; }
         public DateTime DateCreate { get; set; }
+        public string Imgurl { get; set; }
+
     }
 }
