@@ -21,5 +21,6 @@ namespace GIatDo.ViewModel
         public string Email { get; set; }
         public string Phone { get; set; }
         public float Rate { get; set; }
+        public Guid AccountId { get; set; }
     }
 }

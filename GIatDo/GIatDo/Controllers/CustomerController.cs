@@ -45,7 +45,7 @@ namespace GIatDo.ViewModel
             }
             catch (Exception e)
             {
-                return BadRequest("Account Dont Exist");
+                return BadRequest(e.Message);
             }
 
         }
@@ -97,6 +97,17 @@ namespace GIatDo.ViewModel
         public ActionResult GetCustomerByAccountId(Guid Id)
         {
             var result = _customerService.GetCustomers(c => c.AccountId == Id);
+            if (result.Count() == 0)
+            {
+                return NotFound();
+            }
+            return Ok(result.Adapt<List<CustomerVM>>());
+        }
+        [HttpGet("GetByUserID")]
+        public ActionResult GetCustomerByAccountId(string Id)
+        {
+            var AccountId = _accountService.GetAccounts(a => a.User_Id.Equals(Id)).ToList();
+            var result = _customerService.GetCustomers(c => c.AccountId == AccountId[0].Id);
             if (result.Count() == 0)
             {
                 return NotFound();

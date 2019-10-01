@@ -2,7 +2,10 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using GiatDo.Model;
 using GiatDo.Service.Service;
+using GIatDo.ViewModel;
+using Mapster;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -22,7 +25,41 @@ namespace GIatDo.Controllers
             _slotService = slotService;
             _orderService = orderService;
         }
-        //[HttpPost("CreateSlot")]
 
+        [HttpGet("GetById")]
+        public ActionResult GetSlotById(Guid Id)
+        {
+            return Ok(_slotService.GetSlot(Id).Adapt<SlotVM>());
+        }
+
+        [HttpGet("GetAll")]
+        public ActionResult GetSlotAll()
+        {
+            return Ok(_slotService.GetSlots().Adapt<List<SlotVM>>());
+        }
+        [HttpGet("GetByDay")]
+        public ActionResult GetSlotByDay(DateTime date)
+        {
+            return Ok(_slotService.GetSlots(s => s.TimeEnd.Date == date.Date).Adapt<List<SlotVM>>());
+        }
+        [HttpPost]
+        public ActionResult CreateSlot([FromBody]SlotCM model)
+        {
+            _slotService.CreateSlot(model.Adapt<Slot>());
+            _slotService.Save();
+            return Ok(200);
+        }
+        public bool CheckTIme(DateTime TimeStart, DateTime TimeEnd)
+        {
+            var listDate = _slotService.GetSlots(s => s.TimeEnd.Date == TimeStart.Date).ToList();
+            foreach (var item in listDate)
+            {
+                if(item.TimeStart.TimeOfDay> TimeEnd.TimeOfDay)
+                {
+
+                }
+            }
+            return true;
+        }
     }
 }

@@ -87,10 +87,23 @@ namespace GIatDo.Controllers
                 return BadRequest(e.Message);
             }
         }
-        [HttpGet("GetUserId")]
+        [HttpGet("GetAccountId")]
         public ActionResult GetStoreByUserId(Guid Id)
         {
+
             return Ok(_storeService.GetStores().Where(s => s.AccountId == Id).Adapt<List<StoreVM>>());
+        }
+
+        [HttpGet("GetByUserID")]
+        public ActionResult GetCustomerByAccountId(string Id)
+        {
+            var AccountId = _accountService.GetAccounts(a => a.User_Id.Equals(Id)).ToList();
+            var result = _storeService.GetStores(c => c.AccountId == AccountId[0].Id);
+            if (result.Count() == 0)
+            {
+                return NotFound();
+            }
+            return Ok(result.Adapt<List<StoreVM>>());
         }
     }
 }

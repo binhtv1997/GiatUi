@@ -18,12 +18,14 @@ namespace GIatDo.Controllers
         private readonly IShipperService _shipperService;
         private readonly IOrderService _orderService;
         private readonly ICustomerService _customerService;
+        private readonly IAccountService _accountService;
 
-        public ShipperController(IShipperService shipperService, IOrderService orderService, ICustomerService customerService)
+        public ShipperController(IShipperService shipperService, IOrderService orderService, ICustomerService customerService, IAccountService accountService)
         {
             _shipperService = shipperService;
             _orderService = orderService;
             _customerService = customerService;
+            _accountService = accountService;
         }
 
         [HttpPost("CreateShipper")]
@@ -98,6 +100,18 @@ namespace GIatDo.Controllers
             _shipperService.UpdateShipper(newShipper);
             _shipperService.Save();
             return Ok(200);
+        }
+
+        [HttpGet("GetByUserID")]
+        public ActionResult GetCustomerByAccountId(string Id)
+        {
+            var AccountId = _accountService.GetAccounts(a => a.User_Id.Equals(Id)).ToList();
+            var result = _shipperService.GetShippers(c => c.AccountId == AccountId[0].Id);
+            if (result.Count() == 0)
+            {
+                return NotFound();
+            }
+            return Ok(result.Adapt<List<CustomerVM>>());
         }
 
     }
