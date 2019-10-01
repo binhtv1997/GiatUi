@@ -24,7 +24,7 @@ namespace GIatDo.Controllers
         [HttpPost]
         public ActionResult CreateAccount([FromBody] AccountCM model)
         {
-            var result = _accountService.GetAccounts(a => a.User_Id == model.User_Id);
+            var result = _accountService.GetAccounts(a => a.User_Id.Equals(model.User_Id));
             if (result.Count() > 0)
             {
                 return BadRequest("User_Id Has Been Exist");

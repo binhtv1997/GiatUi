@@ -104,15 +104,15 @@ namespace GIatDo.ViewModel
             return Ok(result.Adapt<List<CustomerVM>>());
         }
         [HttpGet("GetByUserID")]
-        public ActionResult GetCustomerByAccountId(string Id)
+        public ActionResult GetCustomerByUserId(string Id)
         {
             var AccountId = _accountService.GetAccounts(a => a.User_Id.Equals(Id)).ToList();
-            var result = _customerService.GetCustomers(c => c.AccountId == AccountId[0].Id);
+            var result = _customerService.GetCustomers(c => c.AccountId == AccountId[0].Id).ToList();
             if (result.Count() == 0)
             {
                 return NotFound();
             }
-            return Ok(result.Adapt<List<CustomerVM>>());
+            return Ok(result[0].Adapt<CustomerVM>());
         }
     }
 }

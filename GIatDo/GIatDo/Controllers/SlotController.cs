@@ -49,6 +49,18 @@ namespace GIatDo.Controllers
             _slotService.Save();
             return Ok(200);
         }
+        [HttpDelete]
+        public ActionResult DeleteSlot(Guid Id)
+        {
+            var model = _slotService.GetSlot(Id);
+            if(model == null)
+            {
+                return NotFound();
+            }
+            _slotService.DeleteSlot(model);
+            _slotService.Save();
+            return Ok(200);
+        }
         public bool CheckTIme(DateTime TimeStart, DateTime TimeEnd)
         {
             var listDate = _slotService.GetSlots(s => s.TimeEnd.Date == TimeStart.Date).ToList();

@@ -17,7 +17,6 @@ namespace GIatDo.Controllers
     {
         private readonly IStoreService _storeService;
         private readonly IAccountService _accountService;
-
         public StoreController(IStoreService storeService, IAccountService accountService)
         {
             _storeService = storeService;
@@ -91,19 +90,18 @@ namespace GIatDo.Controllers
         public ActionResult GetStoreByUserId(Guid Id)
         {
 
-            return Ok(_storeService.GetStores().Where(s => s.AccountId == Id).Adapt<List<StoreVM>>());
+            return Ok(_storeService.GetStores().Where(s => s.AccountId == Id).ToList()[0].Adapt<StoreVM>());
         }
-
         [HttpGet("GetByUserID")]
         public ActionResult GetCustomerByAccountId(string Id)
         {
             var AccountId = _accountService.GetAccounts(a => a.User_Id.Equals(Id)).ToList();
-            var result = _storeService.GetStores(c => c.AccountId == AccountId[0].Id);
+            var result = _storeService.GetStores(c => c.AccountId == AccountId[0].Id).ToList();
             if (result.Count() == 0)
             {
                 return NotFound();
             }
-            return Ok(result.Adapt<List<StoreVM>>());
+            return Ok(result[0].Adapt<StoreVM>());
         }
     }
 }
