@@ -22,7 +22,6 @@ namespace GIatDo.ViewModel
             _customerService = customerService;
             _accountService = accountService;
         }
-
         [HttpPost]
         public ActionResult CreateCustomer([FromBody] CustomerCM model)
         {
@@ -30,7 +29,10 @@ namespace GIatDo.ViewModel
             try
             {
                 var checkAccount = _accountService.GetAccount(model.AccountId);
-
+                if(checkAccount == null)
+                {
+                    return NotFound(400);
+                }
                 var result = _customerService.GetCustomers().Where(a => a.Phone == model.Phone);
                 if (result.Count() > 0)
                 {
@@ -47,7 +49,6 @@ namespace GIatDo.ViewModel
             }
 
         }
-
         [HttpGet("GetById")]
         public ActionResult GetCustomer(Guid Id)
         {
@@ -58,7 +59,6 @@ namespace GIatDo.ViewModel
             }
             return Ok(result.Adapt<CustomerVM>());
         }
-
         [HttpGet("GetAll")]
         public ActionResult GetAllCustomer()
         {
@@ -66,7 +66,6 @@ namespace GIatDo.ViewModel
             var a = CustomerList.Adapt<List<CustomerVM>>();
             return Ok(a);
         }
-
         [HttpPut("UpdateCustomer")]
         public ActionResult UpdateCustomer([FromBody] CustomerVM model)
         {
@@ -80,7 +79,6 @@ namespace GIatDo.ViewModel
             _customerService.Save();
             return Ok(200);
         }
-
         [HttpDelete("DeleteCustomer")]
         public ActionResult DeleteCustomer(Guid Id)
         {
@@ -89,10 +87,21 @@ namespace GIatDo.ViewModel
             {
                 return BadRequest();
             }
+            _accountService.DeleteAccount(s => s.Id == result.AccountId);
             _customerService.DeleteCustomer(result);
             _customerService.Save();
+            _accountService.Save();
             return Ok(200);
         }
-
+        [HttpGet("GetByAccountID")]
+        public ActionResult GetCustomerByAccountId(Guid Id)
+        {
+            var result = _customerService.GetCustomers(c => c.AccountId == Id);
+            if (result.Count() == 0)
+            {
+                return NotFound();
+            }
+            return Ok(result.Adapt<List<CustomerVM>>());
+        }
     }
 }
