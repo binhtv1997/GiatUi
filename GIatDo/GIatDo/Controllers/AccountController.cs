@@ -79,6 +79,12 @@ namespace GIatDo.Controllers
                     var store = _storeService.GetStores(s => s.AccountId == Id).ToList();
 
                     _storeService.DeleteStore(store[0]);
+                    var listService = _serviceService.GetServices(s => s.StoreId == store[0].Id).ToList();
+                    foreach (var item in listService)
+                    {
+                        _serviceService.DeleteService(item);
+                    }
+                    _serviceService.Save();
                     _storeService.Save();
                 }
                 _accountService.DeleteAccount(result);
