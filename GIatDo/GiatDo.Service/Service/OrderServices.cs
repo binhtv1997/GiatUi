@@ -39,7 +39,8 @@ namespace GiatDo.Service.Service
 
         public void DeleteOrder(Order Order)
         {
-            _repository.Delete(Order);
+            Order.IsDelete = true;
+            _repository.Update(Order);
         }
 
         public void DeleteOrder(Expression<Func<Order, bool>> where)

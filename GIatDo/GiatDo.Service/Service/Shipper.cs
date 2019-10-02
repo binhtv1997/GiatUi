@@ -38,7 +38,8 @@ namespace GiatDo.Service.Service
 
         public void DeleteShipper(Shipper Shipper)
         {
-            _repository.Delete(Shipper);
+            Shipper.IsDelete = true;
+            _repository.Update(Shipper);
         }
 
         public void DeleteShipper(Expression<Func<Shipper, bool>> where)
