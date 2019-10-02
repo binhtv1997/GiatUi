@@ -19,6 +19,7 @@ namespace GiatDo.Model
         public Guid? AccountId { get; set; }
         public virtual ICollection<Order> Orders { get; set; }
         public DateTime DateCreate { get; set; }
+        public bool IsDelete { get; set; }
 
     }
 }

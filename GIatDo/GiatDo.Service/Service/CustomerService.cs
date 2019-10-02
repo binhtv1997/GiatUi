@@ -39,7 +39,8 @@ namespace GiatDo.Service.Service
 
         public void DeleteCustomer(Customer Customer)
         {
-            _repository.Delete(Customer);
+            Customer.IsDelete = true;
+            _repository.Update(Customer);
         }
 
         public void DeleteCustomer(Expression<Func<Customer, bool>> where)

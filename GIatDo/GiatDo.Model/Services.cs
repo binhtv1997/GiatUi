@@ -18,5 +18,6 @@ namespace GiatDo.Model
         public Guid ServiceTypeId { get; set; }
         public virtual Store Store { get; set; }
         public Guid StoreId { get; set; }
+        public bool IsDelete { get; set; }
     }
 }

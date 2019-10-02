@@ -61,6 +61,15 @@ namespace GIatDo.Controllers
             _slotService.Save();
             return Ok(200);
         }
+        [HttpPut]
+        public ActionResult UpdateSlot([FromBody] SlotVM model)
+        {
+            var test = _slotService.GetSlot(model.Id);
+            if (test == null) { return NotFound(400); }
+            _slotService.UpdateSlot(model.Adapt(test));
+            _slotService.Save();
+            return Ok(200);
+        }
         public bool CheckTIme(DateTime TimeStart, DateTime TimeEnd)
         {
             var listDate = _slotService.GetSlots(s => s.TimeEnd.Date == TimeStart.Date).ToList();

@@ -15,5 +15,6 @@ namespace GiatDo.Model
         public DateTime TimeEnd { get; set; }
         public virtual ICollection<Order> OrderTake { get; set; }
         public virtual ICollection<Order> OrdersDelivery { get; set; }
+        public bool IsDelete { get; set; }
     }
 }

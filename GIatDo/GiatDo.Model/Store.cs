@@ -20,6 +20,7 @@ namespace GiatDo.Model
         public virtual ICollection<Services> Services { get; set; }
         public DateTime DateCreate { get; set; }
         public string Imgurl { get; set; }
+        public bool IsDelete { get; set; }
 
     }
 }

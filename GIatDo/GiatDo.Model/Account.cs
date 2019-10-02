@@ -17,5 +17,6 @@ namespace GiatDo.Model
         public virtual Admin Admin { get; set; }
         public virtual Customer Customer { get; set; }
         public DateTime DateCreate { get; set; }
+        public bool IsDelete { get; set; }
     }
 }

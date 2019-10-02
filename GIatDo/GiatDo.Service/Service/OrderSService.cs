@@ -38,7 +38,8 @@ namespace GiatDo.Service.Service
 
         public void DeleteOrderService(OrderService OrderService)
         {
-            _repository.Delete(OrderService);
+            OrderService.IsDelete = true;
+            _repository.Update(OrderService);
         }
 
         public void DeleteOrderService(Expression<Func<OrderService, bool>> where)

@@ -38,7 +38,8 @@ namespace GiatDo.Service.Service
 
         public void DeleteAccount(Account Account)
         {
-            _repository.Delete(Account);
+            Account.IsDelete = true;
+            _repository.Update(Account);
         }
 
         public void DeleteAccount(Expression<Func<Account, bool>> where)

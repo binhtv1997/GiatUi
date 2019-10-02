@@ -27,5 +27,6 @@ namespace GiatDo.Model
         public Guid? SlotDeliveryId { get; set; }
         public virtual ICollection<OrderService> OrderServices { get; set; }
         public DateTime DateCreate { get; set; }
+        public bool IsDelete { get; set; }
     }
 }

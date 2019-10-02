@@ -39,7 +39,8 @@ namespace GiatDo.Service.Service
 
         public void DeleteAdmin(Admin Admin)
         {
-            _repository.Delete(Admin);
+            Admin.IsDelete = true;
+            _repository.Update(Admin);
         }
 
         public void DeleteAdmin(Expression<Func<Admin, bool>> where)

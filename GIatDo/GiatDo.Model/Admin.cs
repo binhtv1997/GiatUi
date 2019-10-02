@@ -19,5 +19,6 @@ namespace GiatDo.Model
         public virtual Account Account { get; set; }
         public Guid? AccountId { get; set; }
         public DateTime DateCreate { get; set; }
+        public bool IsDelete { get; set; }
     }
 }

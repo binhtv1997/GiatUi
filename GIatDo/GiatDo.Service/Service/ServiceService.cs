@@ -39,7 +39,8 @@ namespace GiatDo.Service.Service
 
         public void DeleteService(Services Service)
         {
-            _repository.Delete(Service);
+            Service.IsDelete = true;
+            _repository.Update(Service);
         }
 
         public void DeleteService(Expression<Func<Services, bool>> where)

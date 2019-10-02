@@ -4,14 +4,16 @@ using GiatDo.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace GiatDo.Data.Migrations
 {
     [DbContext(typeof(GiatDoDbContext))]
-    partial class GiatDoDbContextModelSnapshot : ModelSnapshot
+    [Migration("20191002145807_d1")]
+    partial class d1
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

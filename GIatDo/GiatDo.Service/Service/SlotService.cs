@@ -38,7 +38,8 @@ namespace GiatDo.Service.Service
 
         public void DeleteSlot(Slot Slot)
         {
-            _repository.Delete(Slot);
+            Slot.IsDelete = true;
+            _repository.Update(Slot);
         }
 
         public void DeleteSlot(Expression<Func<Slot, bool>> where)

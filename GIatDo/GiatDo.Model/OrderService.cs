@@ -17,5 +17,6 @@ namespace GiatDo.Model
         public Guid? OrderId { get; set; }
         public virtual Services Service { get; set; }
         public Guid? ServiceId { get; set; }
+        public bool IsDelete { get; set; }
     }
 }

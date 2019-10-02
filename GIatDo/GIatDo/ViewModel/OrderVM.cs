@@ -27,4 +27,12 @@ namespace GIatDo.ViewModel
         public string CustomerName { get; set; }
         public Guid? SlotDeliveryId { get; set; }
     }
+    public class OrderCM
+    {
+        public float TotalPrice { get; set; }
+        public bool Status { get; set; }
+        //public Guid? ShipperDeliverId { get; set; }
+        //public Guid? CustomerId { get; set; }
+        //public Guid? SlotDeliveryId { get; set; }
+    }
 }
