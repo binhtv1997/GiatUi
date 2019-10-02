@@ -36,6 +36,7 @@ namespace GIatDo.Controllers
                     return BadRequest("Phone has been exsit");
                 }
                 Store newStore = model.Adapt<Store>();
+                newStore.IsDelete = false;
                 _storeService.CreateStore(newStore);
                 _storeService.Save();
                 return Ok(200);
@@ -53,7 +54,7 @@ namespace GIatDo.Controllers
         [HttpGet("GetAll")]
         public ActionResult GetAll()
         {
-            return Ok(_storeService.GetStores().Adapt<List<StoreVM>>());
+            return Ok(_storeService.GetStores(s=>s.IsDelete==false).Adapt<List<StoreVM>>());
         }
         [HttpPut("UpdateStore")]
         public ActionResult Update([FromBody]StoreUM model)
@@ -74,18 +75,18 @@ namespace GIatDo.Controllers
                 return BadRequest(e.Message);
             }
         }
-        [HttpDelete("Delete")]
-        public ActionResult Delete(Guid Id)
-        {
-            try
-            {
-                return Ok(200);
-            }
-            catch (Exception e)
-            {
-                return BadRequest(e.Message);
-            }
-        }
+        //[HttpDelete("Delete")]
+        //public ActionResult Delete(Guid Id)
+        //{
+        //    try
+        //    {
+        //        return Ok(200);
+        //    }
+        //    catch (Exception e)
+        //    {
+        //        return BadRequest(e.Message);
+        //    }
+        //}
         [HttpGet("GetAccountId")]
         public ActionResult GetStoreByUserId(Guid Id)
         {
@@ -96,6 +97,10 @@ namespace GIatDo.Controllers
         public ActionResult GetCustomerByAccountId(string Id)
         {
             var AccountId = _accountService.GetAccounts(a => a.User_Id.Equals(Id)).ToList();
+            if (AccountId.Count() == 0)
+            {
+                return NotFound();
+            }
             var result = _storeService.GetStores(c => c.AccountId == AccountId[0].Id).ToList();
             if (result.Count() == 0)
             {

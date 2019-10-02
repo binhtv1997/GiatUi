@@ -37,6 +37,7 @@ namespace GIatDo.Controllers
                 return BadRequest("Phone Number Has Been Exist");
             }
             Shipper newShipper = shipper.Adapt<Shipper>();
+            newShipper.IsDelete = false;
             _shipperService.CreateShipper(newShipper);
             _shipperService.Save();
             return Ok(200);
@@ -44,26 +45,26 @@ namespace GIatDo.Controllers
         [HttpGet("GetAll")]
         public ActionResult GetShipper()
         {
-            return Ok(_shipperService.GetShippers().Adapt<List<ShipperVM>>());
+            return Ok(_shipperService.GetShippers(s=>s.IsDelete==false).Adapt<List<ShipperVM>>());
         }
         [HttpGet("GetById")]
         public ActionResult GetShipper(Guid Id)
         {
             return Ok(_shipperService.GetShipper(Id).Adapt<ShipperVM>());
         }
-        [HttpDelete("Delete")]
-        public ActionResult DeleteShipper(Guid Id)
-        {
-            Shipper shipper = _shipperService.GetShipper(Id);
-            if (shipper == null)
-            {
-                return NotFound();
-            }
-            _shipperService.DeleteShipper(shipper);
-            _shipperService.Save();
-            return Ok(200);
+        //[HttpDelete("Delete")]
+        //public ActionResult DeleteShipper(Guid Id)
+        //{
+        //    Shipper shipper = _shipperService.GetShipper(Id);
+        //    if (shipper == null)
+        //    {
+        //        return NotFound();
+        //    }
+        //    _shipperService.DeleteShipper(shipper);
+        //    _shipperService.Save();
+        //    return Ok(200);
 
-        }
+        //}
         [HttpGet("GetOrderTake")]
         public ActionResult GetOrderTake(Guid Id)
         {
@@ -105,6 +106,10 @@ namespace GIatDo.Controllers
         public ActionResult GetCustomerByAccountId(string Id)
         {
             var AccountId = _accountService.GetAccounts(a => a.User_Id.Equals(Id)).ToList();
+            if (AccountId.Count() == 0)
+            {
+                return NotFound();
+            }
             var result = _shipperService.GetShippers(c => c.AccountId == AccountId[0].Id).ToList();
             if (result.Count() == 0)
             {

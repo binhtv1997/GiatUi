@@ -35,7 +35,7 @@ namespace GIatDo.Controllers
         [HttpGet("GetAll")]
         public ActionResult GetAllService()
         {
-            return Ok(_serviceService.GetServices().Adapt<List<ServiceVM>>());
+            return Ok(_serviceService.GetServices(s=>s.IsDelete==false).Adapt<List<ServiceVM>>());
         }
 
         [HttpPost("CreateService")]
@@ -51,6 +51,7 @@ namespace GIatDo.Controllers
             }
 
             Services _services = model.Adapt<Services>();
+            _services.IsDelete = false;
             _serviceService.CreateService(_services);
             _serviceService.Save();
             return Ok(200);

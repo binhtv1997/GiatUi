@@ -35,7 +35,7 @@ namespace GIatDo.Controllers
         [HttpGet("GetAll")]
         public ActionResult GetSlotAll()
         {
-            return Ok(_slotService.GetSlots().Adapt<List<SlotVM>>());
+            return Ok(_slotService.GetSlots(s=>s.IsDelete==false).Adapt<List<SlotVM>>());
         }
         [HttpGet("GetByDay")]
         public ActionResult GetSlotByDay(DateTime date)
@@ -45,7 +45,9 @@ namespace GIatDo.Controllers
         [HttpPost]
         public ActionResult CreateSlot([FromBody]SlotCM model)
         {
-            _slotService.CreateSlot(model.Adapt<Slot>());
+            Slot slot = model.Adapt<Slot>();
+            slot.IsDelete = false;
+            _slotService.CreateSlot(slot);
             _slotService.Save();
             return Ok(200);
         }

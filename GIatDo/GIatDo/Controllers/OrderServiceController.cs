@@ -35,7 +35,7 @@ namespace GIatDo.Controllers
         [HttpGet("GetAll")]
         public ActionResult GetAllOrderService()
         {
-            return Ok(_orderServiceService.GetOrderServices().Adapt<List<OrderServiceVM>>());
+            return Ok(_orderServiceService.GetOrderServices(o=>o.IsDelete==false).Adapt<List<OrderServiceVM>>());
         }
 
         [HttpPost("CreateService")]
@@ -45,7 +45,9 @@ namespace GIatDo.Controllers
                 return BadRequest(400);
             if (_serviceService.GetService(model.ServiceId.Value) == null)
                 return BadRequest(400);
-            _orderServiceService.CreateOrderService(model.Adapt<OrderService>());
+            OrderService orderService = model.Adapt<OrderService>();
+            orderService.IsDelete = false;
+            _orderServiceService.CreateOrderService(orderService);
             _orderServiceService.Save();
             return Ok(200);
         }

@@ -16,20 +16,30 @@ namespace GIatDo.Controllers
     public class AccountController : ControllerBase
     {
         private readonly IAccountService _accountService;
+        private readonly IShipperService _shipperService;
+        private readonly IStoreService _storeService;
+        private readonly ICustomerService _customerService;
+        private readonly IServiceService _serviceService;
 
-        public AccountController(IAccountService accountService)
+        public AccountController(IAccountService accountService, IShipperService shipperService, IStoreService storeService, ICustomerService customerService, IServiceService serviceService)
         {
             _accountService = accountService;
+            _shipperService = shipperService;
+            _storeService = storeService;
+            _customerService = customerService;
+            _serviceService = serviceService;
         }
+
         [HttpPost]
         public ActionResult CreateAccount([FromBody] AccountCM model)
         {
-            var result = _accountService.GetAccounts(a => a.User_Id.Equals(model.User_Id));
+            var result = _accountService.GetAccounts(a => a.User_Id.Equals(model.User_Id)).Where(s => s.IsDelete == false);
             if (result.Count() > 0)
             {
                 return BadRequest("User_Id Has Been Exist");
             }
             Account newAccount = model.Adapt<Account>();
+            newAccount.IsDelete = false;
             _accountService.CreateAccount(newAccount);
             _accountService.Save();
             return Ok(200);
@@ -50,6 +60,27 @@ namespace GIatDo.Controllers
             var result = _accountService.GetAccount(Id);
             if (result != null)
             {
+                if (_shipperService.GetShippers(s => s.AccountId == Id).Count() > 0)
+                {
+                    var shipper = _shipperService.GetShippers(s => s.AccountId == Id).ToList();
+                    _shipperService.DeleteShipper(shipper[0]);
+                    _shipperService.Save();
+                }
+
+                if (_customerService.GetCustomers(c => c.AccountId == Id).Count() > 0)
+                {
+                    var customer = _customerService.GetCustomers(s => s.AccountId == Id).ToList();
+                    _customerService.DeleteCustomer(customer[0]);
+                    _customerService.Save();
+                }
+
+                if (_storeService.GetStores(s => s.AccountId == Id).Count() > 0)
+                {
+                    var store = _storeService.GetStores(s => s.AccountId == Id).ToList();
+
+                    _storeService.DeleteStore(store[0]);
+                    _storeService.Save();
+                }
                 _accountService.DeleteAccount(result);
                 _accountService.Save();
                 return Ok(200);
@@ -71,7 +102,7 @@ namespace GIatDo.Controllers
         [HttpGet("GetAll")]
         public ActionResult GetAllAccount()
         {
-            return Ok(_accountService.GetAccounts().Adapt<List<AccountVM>>());
+            return Ok(_accountService.GetAccounts(a=>a.IsDelete == false).Adapt<List<AccountVM>>());
         }
     }
 }

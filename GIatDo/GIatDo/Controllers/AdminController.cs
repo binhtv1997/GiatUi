@@ -41,6 +41,7 @@ namespace GIatDo.Controllers
             Admin newAdmin = admin.Adapt<Admin>();
             if (admin.Password.Length > 6)
             {
+                newAdmin.IsDelete = false;
                 _adminService.CreateAdmin(newAdmin);
                 _adminService.Save();
                 return Ok(200);
@@ -62,9 +63,8 @@ namespace GIatDo.Controllers
         [HttpGet("GetAll")]
         public ActionResult GetAllAdmin()
         {
-            var AdminList = _adminService.GetAdmins();
-            var a = AdminList.Adapt<List<AdminVM>>();
-            return Ok(a);
+
+            return Ok(_adminService.GetAdmins(a=>a.IsDelete==false).Adapt<List<AdminVM>>());
         }
 
         [HttpPut("UpdateAdmin")]

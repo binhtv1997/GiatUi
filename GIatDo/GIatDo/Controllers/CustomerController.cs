@@ -25,11 +25,10 @@ namespace GIatDo.ViewModel
         [HttpPost]
         public ActionResult CreateCustomer([FromBody] CustomerCM model)
         {
-
             try
             {
                 var checkAccount = _accountService.GetAccount(model.AccountId);
-                if(checkAccount == null)
+                if (checkAccount == null)
                 {
                     return NotFound(400);
                 }
@@ -39,6 +38,7 @@ namespace GIatDo.ViewModel
                     return BadRequest("Phone Number Has Been Exsit");
                 }
                 Customer newCustomer = model.Adapt<Customer>();
+                newCustomer.IsDelete = false;
                 _customerService.CreateCustomer(newCustomer);
                 _customerService.Save();
                 return Ok(200);
@@ -62,9 +62,8 @@ namespace GIatDo.ViewModel
         [HttpGet("GetAll")]
         public ActionResult GetAllCustomer()
         {
-            var CustomerList = _customerService.GetCustomers();
-            var a = CustomerList.Adapt<List<CustomerVM>>();
-            return Ok(a);
+  
+            return Ok(_customerService.GetCustomers(s=>s.IsDelete==false).Adapt<List<CustomerVM>>());
         }
         [HttpPut("UpdateCustomer")]
         public ActionResult UpdateCustomer([FromBody] CustomerVM model)
@@ -79,20 +78,20 @@ namespace GIatDo.ViewModel
             _customerService.Save();
             return Ok(200);
         }
-        [HttpDelete("DeleteCustomer")]
-        public ActionResult DeleteCustomer(Guid Id)
-        {
-            var result = _customerService.GetCustomer(Id);
-            if (result == null)
-            {
-                return BadRequest();
-            }
-            _accountService.DeleteAccount(s => s.Id == result.AccountId);
-            _customerService.DeleteCustomer(result);
-            _customerService.Save();
-            _accountService.Save();
-            return Ok(200);
-        }
+        //[HttpDelete("DeleteCustomer")]
+        //public ActionResult DeleteCustomer(Guid Id)
+        //{
+        //    var result = _customerService.GetCustomer(Id);
+        //    if (result == null)
+        //    {
+        //        return BadRequest();
+        //    }
+        //    _accountService.DeleteAccount(s => s.Id == result.AccountId);
+        //    _customerService.DeleteCustomer(result);
+        //    _customerService.Save();
+        //    _accountService.Save();
+        //    return Ok(200);
+        //}
         [HttpGet("GetByAccountID")]
         public ActionResult GetCustomerByAccountId(Guid Id)
         {
@@ -107,6 +106,10 @@ namespace GIatDo.ViewModel
         public ActionResult GetCustomerByUserId(string Id)
         {
             var AccountId = _accountService.GetAccounts(a => a.User_Id.Equals(Id)).ToList();
+            if (AccountId.Count() == 0)
+            {
+                return NotFound();
+            }
             var result = _customerService.GetCustomers(c => c.AccountId == AccountId[0].Id).ToList();
             if (result.Count() == 0)
             {
