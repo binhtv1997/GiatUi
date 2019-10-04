@@ -21,6 +21,6 @@ namespace GiatDo.Model
         public DateTime DateCreate { get; set; }
         public string Imgurl { get; set; }
         public bool IsDelete { get; set; }
-
+        public bool IsActive { get; set; }
     }
 }

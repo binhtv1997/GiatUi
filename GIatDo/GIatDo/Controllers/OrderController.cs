@@ -81,42 +81,42 @@ namespace GIatDo.Controllers
             return Ok(_orderService.GetOrders(o => o.CustomerId == Id).ToList().ElementAt(0).Adapt<OrderVM>());
         }
         [HttpPut("UpdateSlotDelivery")]
-        public ActionResult UpdateSlotDelivery([FromBody]Guid SlotId, Guid OrderId)
+        public ActionResult UpdateSlotDelivery([FromBody]UpdateSlotDelivery model)
         {
-            var checkSlot = _slotService.GetSlot(SlotId);
+            var checkSlot = _slotService.GetSlot(model.SlotId);
             if (checkSlot == null)
             {
                 return NotFound("Slot Not Found");
             }
-            var _order = _orderService.GetOrders(o => o.Id == OrderId).ToList().ElementAt(0);
+            var _order = _orderService.GetOrders(o => o.Id == model.OrderId).ToList().ElementAt(0);
             _order.SlotDeliveryId = checkSlot.Id;
             _orderService.UpdateOrder(_order);
             _orderService.Save();
             return Ok(200);
         }
         [HttpPut("UpdateShipperDelivery")]
-        public ActionResult UpdateShipperDelivery([FromBody]Guid ShipperId, Guid OrderId)
+        public ActionResult UpdateShipperDelivery(UpdateShipperDelivery model)
         {
-            var CheckShipper = _shipperService.GetShipper(ShipperId);
+            var CheckShipper = _shipperService.GetShipper(model.ShipperId);
             if (CheckShipper == null)
             {
                 return NotFound("Shipper Not Found");
             }
-            var _order = _orderService.GetOrders(o => o.Id == OrderId).ToList().ElementAt(0);
+            var _order = _orderService.GetOrders(o => o.Id == model.OrderId).ToList().ElementAt(0);
             _order.ShipperDeliverId = CheckShipper.Id;
             _orderService.UpdateOrder(_order);
             _orderService.Save();
             return Ok(200);
         }
         [HttpPut("UpdateTakeDelivery")]
-        public ActionResult UpdateTakeDelivery([FromBody]Guid ShipperId, Guid OrderId)
+        public ActionResult UpdateTakeDelivery(UpdateTakeDelivery model)
         {
-            var CheckShipper = _shipperService.GetShipper(ShipperId);
+            var CheckShipper = _shipperService.GetShipper(model.ShipperId);
             if (CheckShipper == null)
             {
                 return NotFound("Shipper Not Found");
             }
-            var _order = _orderService.GetOrders(o => o.Id == OrderId).ToList().ElementAt(0);
+            var _order = _orderService.GetOrders(o => o.Id == model.OrderId).ToList().ElementAt(0);
             _order.ShipperTakeId = CheckShipper.Id;
             _orderService.UpdateOrder(_order);
             _orderService.Save();

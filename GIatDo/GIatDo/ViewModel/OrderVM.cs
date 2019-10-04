@@ -55,4 +55,19 @@ namespace GIatDo.ViewModel
         public DateTime DateCreate { get; set; }
         public bool IsDelete { get; set; }
     }
+    public class UpdateTakeDelivery
+    {
+        public Guid ShipperId { get; set; }
+        public Guid OrderId { get; set; }
+    }
+    public class UpdateShipperDelivery
+    {
+        public Guid ShipperId { get; set; }
+        public Guid OrderId { get; set; }
+    }
+    public class UpdateSlotDelivery
+    {
+        public Guid SlotId { get; set; }
+        public Guid OrderId { get; set; }
+    }
 }

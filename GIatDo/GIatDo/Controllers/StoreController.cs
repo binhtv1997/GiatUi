@@ -37,6 +37,7 @@ namespace GIatDo.Controllers
                 }
                 Store newStore = model.Adapt<Store>();
                 newStore.IsDelete = false;
+                newStore.IsActive = true;
                 _storeService.CreateStore(newStore);
                 _storeService.Save();
                 return Ok(200);
@@ -54,7 +55,7 @@ namespace GIatDo.Controllers
         [HttpGet("GetAll")]
         public ActionResult GetAll()
         {
-            return Ok(_storeService.GetStores(s=>s.IsDelete==false).Adapt<List<StoreVM>>());
+            return Ok(_storeService.GetStores(s=>s.IsDelete==false).Where(s1=>s1.IsActive == true).Adapt<List<StoreVM>>());
         }
         [HttpPut("UpdateStore")]
         public ActionResult Update([FromBody]StoreUM model)

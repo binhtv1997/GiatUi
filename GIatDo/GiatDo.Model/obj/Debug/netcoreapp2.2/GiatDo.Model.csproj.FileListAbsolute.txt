@@ -1,9 +1,9 @@
 D:\Was-Clone\GiatUi\GIatDo\GiatDo.Model\bin\Debug\netcoreapp2.2\GiatDo.Model.deps.json
 D:\Was-Clone\GiatUi\GIatDo\GiatDo.Model\bin\Debug\netcoreapp2.2\GiatDo.Model.dll
 D:\Was-Clone\GiatUi\GIatDo\GiatDo.Model\bin\Debug\netcoreapp2.2\GiatDo.Model.pdb
+D:\Was-Clone\GiatUi\GIatDo\GiatDo.Model\obj\Debug\netcoreapp2.2\GiatDo.Model.csprojAssemblyReference.cache
 D:\Was-Clone\GiatUi\GIatDo\GiatDo.Model\obj\Debug\netcoreapp2.2\GiatDo.Model.csproj.CoreCompileInputs.cache
 D:\Was-Clone\GiatUi\GIatDo\GiatDo.Model\obj\Debug\netcoreapp2.2\GiatDo.Model.AssemblyInfoInputs.cache
 D:\Was-Clone\GiatUi\GIatDo\GiatDo.Model\obj\Debug\netcoreapp2.2\GiatDo.Model.AssemblyInfo.cs
 D:\Was-Clone\GiatUi\GIatDo\GiatDo.Model\obj\Debug\netcoreapp2.2\GiatDo.Model.dll
 D:\Was-Clone\GiatUi\GIatDo\GiatDo.Model\obj\Debug\netcoreapp2.2\GiatDo.Model.pdb
-D:\Was-Clone\GiatUi\GIatDo\GiatDo.Model\obj\Debug\netcoreapp2.2\GiatDo.Model.csprojAssemblyReference.cache
