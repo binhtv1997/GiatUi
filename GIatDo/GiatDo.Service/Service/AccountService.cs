@@ -33,6 +33,7 @@ namespace GiatDo.Service.Service
         public void CreateAccount(Account Account)
         {
             Account.DateCreate = DateTime.Now;
+            Account.IsDelete = false;
             _repository.Add(Account);
         }
 

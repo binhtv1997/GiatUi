@@ -34,6 +34,7 @@ namespace GiatDo.Service.Service
         public void CreateCustomer(Customer Customer)
         {
             Customer.DateCreate = DateTime.Now;
+            Customer.IsDelete = false;
             _repository.Add(Customer);
         }
 

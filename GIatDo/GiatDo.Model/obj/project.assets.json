@@ -4080,27 +4080,24 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\vyykh\\.nuget\\packages\\": {},
-    "C:\\Microsoft\\Xamarin\\NuGet\\": {},
+    "C:\\Users\\VO THI KIM THUY\\.nuget\\packages\\": {},
     "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\Was-Clone\\GiatUi\\GIatDo\\GiatDo.Model\\GiatDo.Model.csproj",
+      "projectUniqueName": "D:\\SWD301\\BE\\GiatUi\\GIatDo\\GiatDo.Model\\GiatDo.Model.csproj",
       "projectName": "GiatDo.Model",
-      "projectPath": "D:\\Was-Clone\\GiatUi\\GIatDo\\GiatDo.Model\\GiatDo.Model.csproj",
-      "packagesPath": "C:\\Users\\vyykh\\.nuget\\packages\\",
-      "outputPath": "D:\\Was-Clone\\GiatUi\\GIatDo\\GiatDo.Model\\obj\\",
+      "projectPath": "D:\\SWD301\\BE\\GiatUi\\GIatDo\\GiatDo.Model\\GiatDo.Model.csproj",
+      "packagesPath": "C:\\Users\\VO THI KIM THUY\\.nuget\\packages\\",
+      "outputPath": "D:\\SWD301\\BE\\GiatUi\\GIatDo\\GiatDo.Model\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
-        "C:\\Microsoft\\Xamarin\\NuGet\\",
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
       ],
       "configFilePaths": [
-        "C:\\Users\\vyykh\\AppData\\Roaming\\NuGet\\NuGet.Config",
-        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
-        "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
+        "C:\\Users\\VO THI KIM THUY\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
         "netcoreapp2.2"
