@@ -1,7 +1,7 @@
 {
   "runtimeTarget": {
     "name": ".NETCoreApp,Version=v2.2",
-    "signature": "7735e3004fbb3546fbf5d8bd84718124a33743e5"
+    "signature": "7db46abae311e05152228bf2f3d3e67d43e1cf4b"
   },
   "compilationOptions": {
     "defines": [
@@ -33,7 +33,8 @@
           "Microsoft.AspNetCore.Razor.Design": "2.2.0",
           "Microsoft.NETCore.App": "2.2.0",
           "Microsoft.VisualStudio.Web.CodeGeneration.Design": "2.2.3",
-          "NSwag.AspNetCore": "11.20.1"
+          "NSwag.AspNetCore": "11.20.1",
+          "SonarAnalyzer.CSharp": "7.17.0.9346"
         },
         "runtime": {
           "GIatDo.dll": {}
@@ -474,6 +475,7 @@
           "lib/netstandard1.0/Remotion.Linq.dll": {}
         }
       },
+      "SonarAnalyzer.CSharp/7.17.0.9346": {},
       "System.Collections.Immutable/1.5.0": {},
       "System.ComponentModel/4.3.0": {
         "dependencies": {
@@ -4031,6 +4033,13 @@
       "sha512": "sha512-fK/76UmpC0FXBlGDFVPLJHQlDLYnGC+XY3eoDgCgbtrhi0vzbXDQ3n/IYHhqSKqXQfGw/u04A1drWs7rFVkRjw==",
       "path": "remotion.linq/2.2.0",
       "hashPath": "remotion.linq.2.2.0.nupkg.sha512"
+    },
+    "SonarAnalyzer.CSharp/7.17.0.9346": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-Fmap0bvZRojVKRSJj8xS3Bqsltmjy6i3bJF2gXMkuKdtFFJeS546RT75G3YN3IDSygrIEyfQdL+s8ep60vzORQ==",
+      "path": "sonaranalyzer.csharp/7.17.0.9346",
+      "hashPath": "sonaranalyzer.csharp.7.17.0.9346.nupkg.sha512"
     },
     "System.Collections.Immutable/1.5.0": {
       "type": "package",

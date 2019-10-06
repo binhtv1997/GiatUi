@@ -1,12 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 using GiatDo.Model;
 using GiatDo.Service.Service;
 using GIatDo.ViewModel;
 using Mapster;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace GIatDo.Controllers
@@ -45,26 +43,13 @@ namespace GIatDo.Controllers
         [HttpGet("GetAll")]
         public ActionResult GetShipper()
         {
-            return Ok(_shipperService.GetShippers(s=>s.IsDelete==false).Adapt<List<ShipperVM>>());
+            return Ok(_shipperService.GetShippers(s => !s.IsDelete).Adapt<List<ShipperVM>>());
         }
         [HttpGet("GetById")]
         public ActionResult GetShipper(Guid Id)
         {
             return Ok(_shipperService.GetShipper(Id).Adapt<ShipperVM>());
         }
-        //[HttpDelete("Delete")]
-        //public ActionResult DeleteShipper(Guid Id)
-        //{
-        //    Shipper shipper = _shipperService.GetShipper(Id);
-        //    if (shipper == null)
-        //    {
-        //        return NotFound();
-        //    }
-        //    _shipperService.DeleteShipper(shipper);
-        //    _shipperService.Save();
-        //    return Ok(200);
-
-        //}
         [HttpGet("GetOrderTake")]
         public ActionResult GetOrderTake(Guid Id)
         {
@@ -106,12 +91,12 @@ namespace GIatDo.Controllers
         public ActionResult GetCustomerByAccountId(string Id)
         {
             var AccountId = _accountService.GetAccounts(a => a.User_Id.Equals(Id)).ToList();
-            if (AccountId.Count() == 0)
+            if (!AccountId.Any())
             {
                 return NotFound();
             }
             var result = _shipperService.GetShippers(c => c.AccountId == AccountId[0].Id).ToList();
-            if (result.Count() == 0)
+            if (!result.Any())
             {
                 return NotFound();
             }

@@ -1,8 +1,5 @@
-﻿using GiatDo.Model;
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace GIatDo.ViewModel
 {
@@ -68,6 +65,11 @@ namespace GIatDo.ViewModel
     public class UpdateSlotDelivery
     {
         public Guid SlotId { get; set; }
+        public Guid OrderId { get; set; }
+    }
+    public class UpdateShipperTake
+    {
+        public Guid ShipperId { get; set; }
         public Guid OrderId { get; set; }
     }
 }

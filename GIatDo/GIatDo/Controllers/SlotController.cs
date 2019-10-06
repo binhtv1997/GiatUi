@@ -1,12 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using GiatDo.Model;
 using GiatDo.Service.Service;
 using GIatDo.ViewModel;
 using Mapster;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace GIatDo.Controllers
@@ -35,7 +32,7 @@ namespace GIatDo.Controllers
         [HttpGet("GetAll")]
         public ActionResult GetSlotAll()
         {
-            return Ok(_slotService.GetSlots(s=>s.IsDelete==false).Adapt<List<SlotVM>>());
+            return Ok(_slotService.GetSlots(s=> !s.IsDelete).Adapt<List<SlotVM>>());
         }
         [HttpGet("GetByDay")]
         public ActionResult GetSlotByDay(DateTime date)
@@ -71,18 +68,6 @@ namespace GIatDo.Controllers
             _slotService.UpdateSlot(model.Adapt(test));
             _slotService.Save();
             return Ok(200);
-        }
-        public bool CheckTIme(DateTime TimeStart, DateTime TimeEnd)
-        {
-            var listDate = _slotService.GetSlots(s => s.TimeEnd.Date == TimeStart.Date).ToList();
-            foreach (var item in listDate)
-            {
-                if(item.TimeStart.TimeOfDay> TimeEnd.TimeOfDay)
-                {
-
-                }
-            }
-            return true;
         }
     }
 }

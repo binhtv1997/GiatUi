@@ -1,11 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 using GiatDo.Model;
 using GiatDo.Service.Service;
 using Mapster;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace GIatDo.ViewModel
@@ -23,7 +21,7 @@ namespace GIatDo.ViewModel
             _accountService = accountService;
         }
         [HttpPost]
-        public ActionResult CreateCustomer([FromBody] CustomerCM model)
+        public ActionResult CreateCustomer([FromBody] CustomerCM model) 
         {
             try
             {
@@ -63,7 +61,7 @@ namespace GIatDo.ViewModel
         public ActionResult GetAllCustomer()
         {
   
-            return Ok(_customerService.GetCustomers(s=>s.IsDelete==false).Adapt<List<CustomerVM>>());
+            return Ok(_customerService.GetCustomers(s=> !s.IsDelete).Adapt<List<CustomerVM>>());
         }
         [HttpPut("UpdateCustomer")]
         public ActionResult UpdateCustomer([FromBody] CustomerVM model)
@@ -78,25 +76,12 @@ namespace GIatDo.ViewModel
             _customerService.Save();
             return Ok(200);
         }
-        //[HttpDelete("DeleteCustomer")]
-        //public ActionResult DeleteCustomer(Guid Id)
-        //{
-        //    var result = _customerService.GetCustomer(Id);
-        //    if (result == null)
-        //    {
-        //        return BadRequest();
-        //    }
-        //    _accountService.DeleteAccount(s => s.Id == result.AccountId);
-        //    _customerService.DeleteCustomer(result);
-        //    _customerService.Save();
-        //    _accountService.Save();
-        //    return Ok(200);
-        //}
+    
         [HttpGet("GetByAccountID")]
         public ActionResult GetCustomerByAccountId(Guid Id)
         {
             var result = _customerService.GetCustomers(c => c.AccountId == Id);
-            if (result.Count() == 0)
+            if (!result.Any())
             {
                 return NotFound();
             }
@@ -106,12 +91,12 @@ namespace GIatDo.ViewModel
         public ActionResult GetCustomerByUserId(string Id)
         {
             var AccountId = _accountService.GetAccounts(a => a.User_Id.Equals(Id)).ToList();
-            if (AccountId.Count() == 0)
+            if (!AccountId.Any())
             {
                 return NotFound();
             }
             var result = _customerService.GetCustomers(c => c.AccountId == AccountId[0].Id).ToList();
-            if (result.Count() == 0)
+            if (!result.Any())
             {
                 return NotFound();
             }

@@ -1,12 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 using GiatDo.Model;
 using GiatDo.Service.Service;
 using GIatDo.ViewModel;
 using Mapster;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace GIatDo.Controllers
@@ -36,7 +34,7 @@ namespace GIatDo.Controllers
         {
             var timeCreate = DateTime.Now;
             var checkSlot = _slotService.GetSlots(s => s.TimeStart.Date == timeCreate.Date).Where(t1 => t1.TimeStart.TimeOfDay <= timeCreate.TimeOfDay).Where(t2 => t2.TimeEnd.TimeOfDay >= timeCreate.TimeOfDay).ToList();
-            if (checkSlot.Count() > 0)
+            if (checkSlot.Any())
             {
                 var checkCus = _customerService.GetCustomer(model.CustomerId.Value);
                 if (checkCus == null)
@@ -78,7 +76,21 @@ namespace GIatDo.Controllers
             {
                 return NotFound("Not Found Customer");
             }
-            return Ok(_orderService.GetOrders(o => o.CustomerId == Id).ToList().ElementAt(0).Adapt<OrderVM>());
+            return Ok(value: _orderService.GetOrders(o => o.CustomerId == Id).AsEnumerable().ElementAt(0).Adapt<OrderVM>());
+        }
+        [HttpPut("UpdateShipperTake")]
+        public ActionResult UpdateShipperTake([FromBody]UpdateShipperTake model)
+        {
+            var CheckShipper = _shipperService.GetShipper(model.ShipperId);
+            if (CheckShipper == null)
+            {
+                return NotFound("Shipper Not Found");
+            }
+            var _order = _orderService.GetOrders(o => o.Id == model.OrderId).AsEnumerable().ElementAt(0);
+            _order.ShipperTakeId = CheckShipper.Id;
+            _orderService.UpdateOrder(_order);
+            _orderService.Save();
+            return Ok(200);
         }
         [HttpPut("UpdateSlotDelivery")]
         public ActionResult UpdateSlotDelivery([FromBody]UpdateSlotDelivery model)
@@ -88,36 +100,22 @@ namespace GIatDo.Controllers
             {
                 return NotFound("Slot Not Found");
             }
-            var _order = _orderService.GetOrders(o => o.Id == model.OrderId).ToList().ElementAt(0);
+            var _order = _orderService.GetOrders(o => o.Id == model.OrderId).AsEnumerable().ElementAt(0);
             _order.SlotDeliveryId = checkSlot.Id;
             _orderService.UpdateOrder(_order);
             _orderService.Save();
             return Ok(200);
         }
         [HttpPut("UpdateShipperDelivery")]
-        public ActionResult UpdateShipperDelivery(UpdateShipperDelivery model)
+        public ActionResult UpdateShipperDelivery([FromBody]UpdateShipperDelivery model)
         {
             var CheckShipper = _shipperService.GetShipper(model.ShipperId);
             if (CheckShipper == null)
             {
                 return NotFound("Shipper Not Found");
             }
-            var _order = _orderService.GetOrders(o => o.Id == model.OrderId).ToList().ElementAt(0);
+            var _order = _orderService.GetOrders(o => o.Id == model.OrderId).AsEnumerable().ElementAt(0);
             _order.ShipperDeliverId = CheckShipper.Id;
-            _orderService.UpdateOrder(_order);
-            _orderService.Save();
-            return Ok(200);
-        }
-        [HttpPut("UpdateTakeDelivery")]
-        public ActionResult UpdateTakeDelivery(UpdateTakeDelivery model)
-        {
-            var CheckShipper = _shipperService.GetShipper(model.ShipperId);
-            if (CheckShipper == null)
-            {
-                return NotFound("Shipper Not Found");
-            }
-            var _order = _orderService.GetOrders(o => o.Id == model.OrderId).ToList().ElementAt(0);
-            _order.ShipperTakeId = CheckShipper.Id;
             _orderService.UpdateOrder(_order);
             _orderService.Save();
             return Ok(200);

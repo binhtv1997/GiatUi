@@ -1,12 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 using GiatDo.Model;
 using GiatDo.Service.Service;
 using GIatDo.ViewModel;
 using Mapster;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace GIatDo.Controllers
@@ -55,7 +53,7 @@ namespace GIatDo.Controllers
         [HttpGet("GetAll")]
         public ActionResult GetAll()
         {
-            return Ok(_storeService.GetStores(s=>s.IsDelete==false).Where(s1=>s1.IsActive == true).Adapt<List<StoreVM>>());
+            return Ok(_storeService.GetStores(s=> !s.IsDelete).Where(s1=> s1.IsActive).Adapt<List<StoreVM>>());
         }
         [HttpPut("UpdateStore")]
         public ActionResult Update([FromBody]StoreUM model)
@@ -76,18 +74,6 @@ namespace GIatDo.Controllers
                 return BadRequest(e.Message);
             }
         }
-        //[HttpDelete("Delete")]
-        //public ActionResult Delete(Guid Id)
-        //{
-        //    try
-        //    {
-        //        return Ok(200);
-        //    }
-        //    catch (Exception e)
-        //    {
-        //        return BadRequest(e.Message);
-        //    }
-        //}
         [HttpGet("GetAccountId")]
         public ActionResult GetStoreByUserId(Guid Id)
         {
@@ -98,12 +84,12 @@ namespace GIatDo.Controllers
         public ActionResult GetCustomerByAccountId(string Id)
         {
             var AccountId = _accountService.GetAccounts(a => a.User_Id.Equals(Id)).ToList();
-            if (AccountId.Count() == 0)
+            if (!AccountId.Any())
             {
                 return NotFound();
             }
             var result = _storeService.GetStores(c => c.AccountId == AccountId[0].Id).ToList();
-            if (result.Count() == 0)
+            if (!result.Any())
             {
                 return NotFound();
             }

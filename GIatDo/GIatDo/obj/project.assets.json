@@ -3276,6 +3276,9 @@
           }
         }
       },
+      "SonarAnalyzer.CSharp/7.17.0.9346": {
+        "type": "package"
+      },
       "System.AppContext/4.3.0": {
         "type": "package",
         "dependencies": {
@@ -8828,6 +8831,24 @@
         "version.txt"
       ]
     },
+    "SonarAnalyzer.CSharp/7.17.0.9346": {
+      "sha512": "Fmap0bvZRojVKRSJj8xS3Bqsltmjy6i3bJF2gXMkuKdtFFJeS546RT75G3YN3IDSygrIEyfQdL+s8ep60vzORQ==",
+      "type": "package",
+      "path": "sonaranalyzer.csharp/7.17.0.9346",
+      "hasTools": true,
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "License.txt",
+        "analyzers/Google.Protobuf.dll",
+        "analyzers/SonarAnalyzer.CSharp.dll",
+        "analyzers/SonarAnalyzer.dll",
+        "sonaranalyzer.csharp.7.17.0.9346.nupkg.sha512",
+        "sonaranalyzer.csharp.nuspec",
+        "tools/install.ps1",
+        "tools/uninstall.ps1"
+      ]
+    },
     "System.AppContext/4.3.0": {
       "sha512": "fKC+rmaLfeIzUhagxY17Q9siv/sPrjjKcfNg1Ic8IlQkZLipo8ljcaZQu4VtI4Jqbzjc2VTjzGLF6WmsRXAEgA==",
       "type": "package",
@@ -13576,7 +13597,8 @@
       "Microsoft.AspNetCore.Razor.Design >= 2.2.0",
       "Microsoft.NETCore.App >= 2.2.0",
       "Microsoft.VisualStudio.Web.CodeGeneration.Design >= 2.2.3",
-      "NSwag.AspNetCore >= 11.20.1"
+      "NSwag.AspNetCore >= 11.20.1",
+      "SonarAnalyzer.CSharp >= 7.17.0.9346"
     ]
   },
   "packageFolders": {
@@ -13666,6 +13688,12 @@
           "NSwag.AspNetCore": {
             "target": "Package",
             "version": "[11.20.1, )"
+          },
+          "SonarAnalyzer.CSharp": {
+            "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
+            "suppressParent": "All",
+            "target": "Package",
+            "version": "[7.17.0.9346, )"
           }
         },
         "imports": [

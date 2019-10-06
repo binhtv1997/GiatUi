@@ -1,12 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 using GiatDo.Model;
 using GiatDo.Service.Service;
 using GIatDo.ViewModel;
 using Mapster;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace GIatDo.Controllers
@@ -64,7 +62,7 @@ namespace GIatDo.Controllers
         public ActionResult GetAllAdmin()
         {
 
-            return Ok(_adminService.GetAdmins(a=>a.IsDelete==false).Adapt<List<AdminVM>>());
+            return Ok(_adminService.GetAdmins(a=> !a.IsDelete).Adapt<List<AdminVM>>());
         }
 
         [HttpPut("UpdateAdmin")]

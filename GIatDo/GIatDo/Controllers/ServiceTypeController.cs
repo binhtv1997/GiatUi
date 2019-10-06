@@ -1,12 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using GiatDo.Model;
 using GiatDo.Service.Service;
 using GIatDo.ViewModel;
 using Mapster;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace GIatDo.Controllers
@@ -25,7 +22,7 @@ namespace GIatDo.Controllers
         [HttpGet("GetAll")]
         public ActionResult GetAll()
         {
-            return Ok(_serviceTypeService.GetServiceTypes(s=>s.IsDelete==false).Adapt<List<ServiceTypeVM>>());
+            return Ok(_serviceTypeService.GetServiceTypes(s=> !s.IsDelete).Adapt<List<ServiceTypeVM>>());
         }
         [HttpGet("GetById")]
         public ActionResult GetById(Guid Id)

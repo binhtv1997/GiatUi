@@ -1,12 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 using GiatDo.Model;
 using GiatDo.Service.Service;
 using GIatDo.ViewModel;
 using Mapster;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace GIatDo.Controllers
@@ -33,7 +31,7 @@ namespace GIatDo.Controllers
         [HttpPost]
         public ActionResult CreateAccount([FromBody] AccountCM model)
         {
-            var result = _accountService.GetAccounts(a => a.User_Id.Equals(model.User_Id)).Where(s => s.IsDelete == false);
+            var result = _accountService.GetAccounts(a => a.User_Id.Equals(model.User_Id)).Where(s => !s.IsDelete);
             if (result.Count() > 0)
             {
                 return BadRequest("User_Id Has Been Exist");
@@ -108,7 +106,7 @@ namespace GIatDo.Controllers
         [HttpGet("GetAll")]
         public ActionResult GetAllAccount()
         {
-            return Ok(_accountService.GetAccounts(a=>a.IsDelete == false).Adapt<List<AccountVM>>());
+            return Ok(_accountService.GetAccounts(a=> !a.IsDelete).Adapt<List<AccountVM>>());
         }
     }
 }
