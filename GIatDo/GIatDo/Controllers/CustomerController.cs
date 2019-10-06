@@ -93,14 +93,38 @@ namespace GIatDo.ViewModel
             var AccountId = _accountService.GetAccounts(a => a.User_Id.Equals(Id)).ToList();
             if (!AccountId.Any())
             {
-                return NotFound();
+                CreateAccount(Id);
+                //get created account 
+                var accountCreated = _accountService.GetAccounts(t => t.User_Id.Equals(Id)).ToList();
+                Customer customer = CreateCustomer(accountCreated);
+                return Ok(customer.Adapt<CustomerVM>());
             }
             var result = _customerService.GetCustomers(c => c.AccountId == AccountId[0].Id).ToList();
             if (!result.Any())
             {
-                return NotFound();
+                Customer customer = CreateCustomer(AccountId);
+                return Ok(customer.Adapt<CustomerVM>());
             }
             return Ok(result[0].Adapt<CustomerVM>());
+        }
+
+         private Account CreateAccount(String UId)
+        {
+            Account account = new Account();
+            account.User_Id = UId;
+            _accountService.CreateAccount(account);
+            _accountService.Save();
+            return account;
+        }
+
+        private Customer CreateCustomer(List<Account> accountCreated)
+        {
+            Customer customer = new Customer();
+            customer.Rate = 0;
+            customer.AccountId = accountCreated[0].Id;
+            _customerService.CreateCustomer(customer);
+            _customerService.Save();
+            return customer;
         }
     }
 }
