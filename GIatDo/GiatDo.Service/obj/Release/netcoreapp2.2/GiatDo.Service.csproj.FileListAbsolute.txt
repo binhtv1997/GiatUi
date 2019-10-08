@@ -12,3 +12,17 @@ D:\Was-Clone\GiatUi\GIatDo\GiatDo.Service\obj\Release\netcoreapp2.2\GiatDo.Servi
 D:\Was-Clone\GiatUi\GIatDo\GiatDo.Service\obj\Release\netcoreapp2.2\GiatDo.Service.csproj.CopyComplete
 D:\Was-Clone\GiatUi\GIatDo\GiatDo.Service\obj\Release\netcoreapp2.2\GiatDo.Service.dll
 D:\Was-Clone\GiatUi\GIatDo\GiatDo.Service\obj\Release\netcoreapp2.2\GiatDo.Service.pdb
+D:\SWD301\BE\GiatUi\GIatDo\GiatDo.Service\bin\Release\netcoreapp2.2\GiatDo.Service.deps.json
+D:\SWD301\BE\GiatUi\GIatDo\GiatDo.Service\bin\Release\netcoreapp2.2\GiatDo.Service.dll
+D:\SWD301\BE\GiatUi\GIatDo\GiatDo.Service\bin\Release\netcoreapp2.2\GiatDo.Service.pdb
+D:\SWD301\BE\GiatUi\GIatDo\GiatDo.Service\bin\Release\netcoreapp2.2\GiatDo.Data.dll
+D:\SWD301\BE\GiatUi\GIatDo\GiatDo.Service\bin\Release\netcoreapp2.2\GiatDo.Model.dll
+D:\SWD301\BE\GiatUi\GIatDo\GiatDo.Service\bin\Release\netcoreapp2.2\GiatDo.Data.pdb
+D:\SWD301\BE\GiatUi\GIatDo\GiatDo.Service\bin\Release\netcoreapp2.2\GiatDo.Model.pdb
+D:\SWD301\BE\GiatUi\GIatDo\GiatDo.Service\obj\Release\netcoreapp2.2\GiatDo.Service.csprojAssemblyReference.cache
+D:\SWD301\BE\GiatUi\GIatDo\GiatDo.Service\obj\Release\netcoreapp2.2\GiatDo.Service.csproj.CoreCompileInputs.cache
+D:\SWD301\BE\GiatUi\GIatDo\GiatDo.Service\obj\Release\netcoreapp2.2\GiatDo.Service.AssemblyInfoInputs.cache
+D:\SWD301\BE\GiatUi\GIatDo\GiatDo.Service\obj\Release\netcoreapp2.2\GiatDo.Service.AssemblyInfo.cs
+D:\SWD301\BE\GiatUi\GIatDo\GiatDo.Service\obj\Release\netcoreapp2.2\GiatDo.Service.csproj.CopyComplete
+D:\SWD301\BE\GiatUi\GIatDo\GiatDo.Service\obj\Release\netcoreapp2.2\GiatDo.Service.dll
+D:\SWD301\BE\GiatUi\GIatDo\GiatDo.Service\obj\Release\netcoreapp2.2\GiatDo.Service.pdb
